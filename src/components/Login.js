@@ -52,9 +52,7 @@ export function Login() {
       setError(error.message);
     }
   };
-  const LoginConsole=()=>{
-    console.log(userLogin)
-  }
+
 
 if(userLogin){
   return (
