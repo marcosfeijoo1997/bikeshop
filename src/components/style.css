@@ -1,0 +1,49 @@
+.carrousel {
+
+    color: black;
+}
+
+.carrousel img {
+    height: 40vh;
+    width: auto;
+    margin: auto;
+
+
+}
+.red {
+    background-color: #48225d;
+color: white;
+font-weight: 600;
+text-align: center;
+font-size: large;
+}
+.banks {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin: auto;
+    padding: auto;
+    margin-top: 10%;
+    list-style: none;
+
+ 
+}
+.banks img {
+    padding: 1px;
+
+    align-items: center;
+    display: flex;
+
+}
+.imgCard{
+    display: flex;
+top: auto;
+
+height: 200px;
+
+}
+.borderSolid {
+
+    height: 100%;
+    cursor: pointer;
+}
