@@ -8,27 +8,26 @@ import { ChevronDownIcon,  } from '@heroicons/react/20/solid'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {WheelIcon,BikeIcon,HelmetIcon,ShirtIcon,SpannerIcon} from '../assets/aamisicons/Icons'
-
+import { useAuth } from '../context/authContext'
 
 
 
 
 const products = [
-  { name: 'Bicicletas', description: 'Get a better understanding of your traffic', href: '#Bicicletas', icon:BikeIcon},
-  { name: 'Repuestos', description: 'Speak directly to your customers', href: '#Repuestos', icon: WheelIcon },
-  { name: 'Accesorios', description: 'Your customers’ data will be safe and secure', href: '#Accesorios', icon: HelmetIcon },
-  { name: 'Indumentaria', description: 'Connect with third-party tools', href: '#Indumentaria', icon: ShirtIcon },
-  { name: 'Otros', description: 'Build strategic funnels that will convert', href: '#Otros', icon: SpannerIcon },
+  { name: 'Bicicletas', description: 'Get a better understanding of your traffic', href: 'bicicletas', icon:BikeIcon},
+  { name: 'Repuestos', description: 'Speak directly to your customers', href: 'repuestos', icon: WheelIcon },
+  { name: 'Accesorios', description: 'Your customers’ data will be safe and secure', href: 'accesorios', icon: HelmetIcon },
+  { name: 'Indumentaria', description: 'Connect with third-party tools', href: 'indumentaria', icon: ShirtIcon },
+  { name: 'Otros', description: 'Build strategic funnels that will convert', href: 'otros', icon: SpannerIcon },
 ]
 
 
 
 export default function Navbar() {
+  const {  userLogin } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [open,setOpen]=useState(false)
-
-
-
+  const userName=(userLogin)?userLogin.displayName:''
 
   return (
     <header className="bg-white" onMouseLeave={() => setOpen(false)}>
@@ -67,19 +66,21 @@ export default function Navbar() {
           className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
         >
           <div className="p-4">
+            
           {products.map((item) => (
                     <div
-                      key={item.name}
+                      key={item.name} 
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
                       </div>
                       <div className="flex-auto">
-                        <a href={item.href} className="block font-semibold text-gray-900">
+                      
+                        <NavLink to={`Products/${item.href}`} className="block font-semibold text-gray-900">
                           {item.name}
                           <span className="absolute inset-0" />
-                        </a>
+                        </NavLink>
                         <p className="mt-1 text-gray-600">{item.description}</p>
                       </div>
                     </div>
@@ -119,11 +120,19 @@ export default function Navbar() {
 
           </NavLink>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        {userName?(<div className="lg:flex lg:flex-1 lg:justify-end">
+          
           <NavLink to="login" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </NavLink>
-        </div>
+                      {userName} <span aria-hidden="true">&rarr;</span>
+                   </NavLink>
+                 </div>):( <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          
+          <NavLink to="login" className="text-sm font-semibold leading-6 text-gray-900">
+                     Log in <span aria-hidden="true">&rarr;</span>
+                   </NavLink>
+                 </div>)}
+        
+       
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />

@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import BarRed from './components/BarRed'
 import Index from "./components/Index";
 import Products from "./components/Products";
+import ProductDetail from "./components/ProductDetail";
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
         <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/Products" element={<Products/>}/>
+        <Route path="/Products/:category" element={<Products/>}/>
+        <Route path="/Products/:category/:detail" element={<ProductDetail/>}/>
 
           <Route path="/login" element={<Login />} />
           <Route
